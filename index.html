@@ -3,145 +3,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon | EB</title>
+    <title>Bubbles - Coming Soon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
     <style>
-        /* Modern CSS Reset */
+        /* Base Styles */
+        :root {
+            --pink: #FFB6C1;
+            --light-pink: #FFE4E1;
+            --brown: #6D4C41;
+            --light-brown: #A1887F;
+            --white: #FFFFFF;
+            --gray: #8D8D8D;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
-        /* Base Styles */
+        
         body {
-            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--brown);
             line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Main Container */
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 20px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        /* Header Styles */
-        header {
-            padding: 2rem 0;
-            width: 100%;
-        }
-
-        .logo {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #2c3e50;
-            letter-spacing: 1px;
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem 0;
-        }
-
-        .coming-soon {
-            font-size: 4rem;
-            font-weight: 300;
-            color: #2c3e50;
-            margin-bottom: 1.5rem;
-            letter-spacing: 2px;
+            overflow-x: hidden;
+            background-color: var(--white);
             position: relative;
-        }
-
-        .coming-soon::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #3498db, #9b59b6);
-            margin: 1rem auto;
-            border-radius: 2px;
-        }
-
-        .message {
-            font-size: 1.5rem;
-            color: #7f8c8d;
-            max-width: 600px;
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-
-        .highlight {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            background: linear-gradient(135deg, #3498db, #9b59b6);
-            color: white;
-            border-radius: 50px;
-            font-weight: 500;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-            margin-top: 1rem;
-        }
-
-        /* Footer */
-        footer {
-            padding: 2rem 0;
-            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            color: #95a5a6;
-            font-size: 0.9rem;
         }
-
-        /* Animation */
+        
+        /* Fix for horizontal scrolling */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--brown);
+        }
+        
+        p {
+            color: var(--light-brown);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Logo Animation */
+        .logo-container {
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .logo {
+            width: 180px;
+            height: 180px;
+            transition: var(--transition);
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(109, 76, 65, 0.15));
+        }
+        
+        .logo:hover {
+            animation: wobble 0.8s ease, pulse 1.5s ease infinite;
+        }
+        
+        /* Content Styles */
+        .coming-soon-content {
+            padding: 2rem 0;
+        }
+        
+        .coming-soon-content h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .coming-soon-content p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+        
+        /* Social Links */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+            animation: fadeIn 1s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+        
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--light-pink);
+            color: var(--brown);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            text-decoration: none;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(109, 76, 65, 0.1);
+        }
+        
+        .social-link:hover {
+            background: var(--pink);
+            color: var(--white);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
+        }
+        
+        /* Floating Decorations - More Visible */
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .floating-shape {
+            position: absolute;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+        
+        .circle {
+            border-radius: 50%;
+            border: 2px solid var(--pink);
+            opacity: 0.25;
+        }
+        
+        .circle-fill {
+            border-radius: 50%;
+            background-color: var(--pink);
+            opacity: 0.2;
+        }
+        
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 60px solid var(--pink);
+            opacity: 0.2;
+        }
+        
+        .diamond {
+            width: 60px;
+            height: 60px;
+            transform: rotate(45deg);
+            border: 2px solid var(--pink);
+            opacity: 0.25;
+        }
+        
+        .bubble {
+            border-radius: 50%;
+            background-color: var(--pink);
+            opacity: 0.15;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        /* Floating dots - More Visible */
+        .floating-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--pink);
+            opacity: 0.25;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        .animated {
-            animation: fadeIn 1s ease-out forwards;
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
         }
-
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes wobble {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        @keyframes drift {
+            0% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(40px) translateY(-20px); }
+            100% { transform: translateX(0) translateY(0); }
+        }
+        
+        @keyframes pulse-opacity {
+            0% { opacity: 0.15; }
+            50% { opacity: 0.3; }
+            100% { opacity: 0.15; }
+        }
+        
         /* Responsive Adjustments */
         @media (max-width: 768px) {
-            .coming-soon {
-                font-size: 2.5rem;
+            .logo {
+                width: 150px;
+                height: 150px;
             }
-            .message {
-                font-size: 1.2rem;
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .social-link {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="animated">
-           
-        </header>
-
-        <main class="main-content">
-            <h1 class="coming-soon animated" style="animation-delay: 0.2s">COMING SOON</h1>
-            <!-- <p class="message animated" style="animation-delay: 0.4s">We're working hard to bring you an amazing experience.</p> -->
-            <div class="highlight animated" style="animation-delay: 0.6s">This is where the site will be</div>
-        </main>
-
-        <footer class="animated" style="animation-delay: 0.8s">
-            <p>&copy; EB</p>
-        </footer>
+    <!-- Floating Background Elements - More Visible -->
+    <div class="floating-shapes">
+        <!-- Large background shapes -->
+        <div class="floating-shape circle" style="width: 250px; height: 250px; top: 10%; left: 5%; animation: drift 18s ease-in-out infinite; opacity: 0.2;"></div>
+        <div class="floating-shape circle-fill" style="width: 180px; height: 180px; bottom: 15%; right: 8%; animation: float 14s ease-in-out infinite 2s; opacity: 0.25;"></div>
+        
+        <!-- Medium decorative elements -->
+        <div class="floating-shape triangle" style="top: 30%; right: 10%; animation: wobble 10s ease-in-out infinite; opacity: 0.25;"></div>
+        <div class="floating-shape diamond" style="bottom: 25%; left: 10%; animation: rotate 25s linear infinite; opacity: 0.3;"></div>
+        <div class="floating-shape bubble" style="width: 120px; height: 120px; top: 70%; left: 20%; animation: drift 15s ease-in-out infinite 1s; opacity: 0.2;"></div>
+        <div class="floating-shape bubble" style="width: 80px; height: 80px; top: 20%; right: 20%; animation: float 12s ease-in-out infinite 0.5s; opacity: 0.25;"></div>
+        
+        <!-- Floating dots - More visible -->
+        <div class="floating-dot" style="top: 15%; left: 15%; animation-delay: 0s; animation-duration: 12s; opacity: 0.3;"></div>
+        <div class="floating-dot" style="top: 75%; left: 85%; animation-delay: 1s; animation-duration: 14s; opacity: 0.3;"></div>
+        <div class="floating-dot" style="top: 40%; left: 70%; animation-delay: 2s; animation-duration: 11s; opacity: 0.35;"></div>
+        <div class="floating-dot" style="top: 60%; left: 25%; animation-delay: 3s; animation-duration: 13s; opacity: 0.3;"></div>
+        <div class="floating-dot" style="top: 85%; left: 10%; animation-delay: 0.5s; animation-duration: 15s; opacity: 0.35;"></div>
+        <div class="floating-dot" style="top: 25%; right: 15%; animation-delay: 1.5s; animation-duration: 10s; opacity: 0.3;"></div>
     </div>
+    
+    <div class="container">
+        <div class="coming-soon-content">
+            <!-- Animated Logo - More prominent -->
+            <div class="logo-container">
+                <img src="ei_1744664830459-removebg-preview.png" alt="Bubbles Logo" class="logo">
+            </div>
+            
+            <h1>BubblesGMB Coming Soon</h1>
+            <p>We're crafting something special just for you! Our team is working hard to create an unforgettable experience. Stay tuned for our grand reveal.</p>
+            
+            <!-- Social Links - Clean without underlines -->
+            <div class="social-links">
+                <a href="https://www.instagram.com/bubbles_gmb/?hl=en" class="social-link" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <!-- <a href="#" class="social-link" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a> -->
+                <a href="https://www.tiktok.com/@bubbles_gmb" class="social-link" aria-label="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <!-- <a href="mailto:contact@example.com" class="social-link" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a> -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Logo hover effect
+        const logo = document.querySelector('.logo');
+        logo.addEventListener('mouseenter', () => {
+            logo.style.animation = 'none';
+            setTimeout(() => {
+                logo.style.animation = '';
+            }, 800);
+        });
+        
+        // Make decorative elements pulse occasionally
+        const shapes = document.querySelectorAll('.floating-shape, .floating-dot');
+        shapes.forEach(shape => {
+            // Randomly add pulse animation to some elements
+            if (Math.random() > 0.7) {
+                shape.style.animation += ', pulse-opacity 4s ease infinite';
+            }
+        });
+    </script>
 </body>
 </html>
